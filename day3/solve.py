@@ -3,6 +3,9 @@ from collections import defaultdict
 def neighbors(y, x, n):
     for dy in [-1, 0, 1]:
         for dx in [-1, 0, 1]:
+            if dy == 0 and dx == 0:
+                continue
+
             ny = y + dy
             nx = x + dx
             if 0 < ny < n and 0 < nx < n:
