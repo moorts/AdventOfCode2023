@@ -6,20 +6,14 @@ def part1(cards):
     return score
 
 def part2(cards):
-    copies = []
-    matches = dict()
+    copies = [1] * len(cards)
+    score = 0
     for i, (left, right) in enumerate(cards):
-        matches[i] = []
-        if len(intersection := left & right) > 0:
-            matches[i] = [i + j + 1 for j in range(len(intersection))]
-            copies.extend(matches[i])
+        card_score = len(left & right)
+        for j in range(card_score):
+            copies[i + j + 1] += copies[i]
+        score += copies[i]
 
-    score = len(cards)
-    while len(copies) > 0:
-        i = copies.pop()
-        left, right = cards[i]
-        score += 1
-        copies.extend(matches[i])
     return score
 
 
